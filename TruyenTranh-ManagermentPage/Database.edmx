@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Managerment_PageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account_Detail">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="int" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" />
+          <Property Name="imgAccount" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Chuong">
+          <Key>
+            <PropertyRef Name="idChuong" />
+          </Key>
+          <Property Name="idChuong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenChuong" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="idComic" Type="int" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Comic">
+          <Key>
+            <PropertyRef Name="idComic" />
+          </Key>
+          <Property Name="idComic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameComic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="imgComic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="idTypeComic" Type="int" Nullable="false" />
+          <Property Name="decription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="idAccount" Type="int" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Forgot_Password">
+          <Key>
+            <PropertyRef Name="idForgot_Password" />
+          </Key>
+          <Property Name="idForgot_Password" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListFavourite">
+          <Key>
+            <PropertyRef Name="idFavourite" />
+            <PropertyRef Name="idAccount" />
+            <PropertyRef Name="idComic" />
+          </Key>
+          <Property Name="idFavourite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAccount" Type="int" Nullable="false" />
+          <Property Name="idComic" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Comic">
+          <Key>
+            <PropertyRef Name="idTypeComic" />
+          </Key>
+          <Property Name="idTypeComic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameTypeComic" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Detail">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="int" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" />
+          <Property Name="imgAccount" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Account_D__idAcc__4E88ABD4">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Chuong__idComic__6383C8BA">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="idComic" />
+            </Principal>
+            <Dependent Role="Chuong">
+              <PropertyRef Name="idComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comic__idAccount__5FB337D6">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comic__idTypeCom__5EBF139D">
+          <End Role="Type_Comic" Type="Self.Type_Comic" Multiplicity="1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Comic">
+              <PropertyRef Name="idTypeComic" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="idTypeComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListFavou__idAcc__66603565">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListFavourite" Type="Self.ListFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="ListFavourite">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListFavou__idCom__6754599E">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="ListFavourite" Type="Self.ListFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="idComic" />
+            </Principal>
+            <Dependent Role="ListFavourite">
+              <PropertyRef Name="idComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Deta__idAcc__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Detail" Type="Self.User_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="User_Detail">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Managerment_PageModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chuong" EntityType="Self.Chuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comic" EntityType="Self.Comic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forgot_Password" EntityType="Self.Forgot_Password" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListFavourite" EntityType="Self.ListFavourite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Comic" EntityType="Self.Type_Comic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Detail" EntityType="Self.User_Detail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account_D__idAcc__4E88ABD4" Association="Self.FK__Account_D__idAcc__4E88ABD4">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Chuong__idComic__6383C8BA" Association="Self.FK__Chuong__idComic__6383C8BA">
+            <End Role="Comic" EntitySet="Comic" />
+            <End Role="Chuong" EntitySet="Chuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comic__idAccount__5FB337D6" Association="Self.FK__Comic__idAccount__5FB337D6">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Comic" EntitySet="Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comic__idTypeCom__5EBF139D" Association="Self.FK__Comic__idTypeCom__5EBF139D">
+            <End Role="Type_Comic" EntitySet="Type_Comic" />
+            <End Role="Comic" EntitySet="Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListFavou__idAcc__66603565" Association="Self.FK__ListFavou__idAcc__66603565">
+            <End Role="User" EntitySet="User" />
+            <End Role="ListFavourite" EntitySet="ListFavourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListFavou__idCom__6754599E" Association="Self.FK__ListFavou__idCom__6754599E">
+            <End Role="Comic" EntitySet="Comic" />
+            <End Role="ListFavourite" EntitySet="ListFavourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Deta__idAcc__5812160E" Association="Self.FK__User_Deta__idAcc__5812160E">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Detail" EntitySet="User_Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Managerment_PageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Account_Detail" Relationship="Self.FK__Account_D__idAcc__4E88ABD4" FromRole="Account" ToRole="Account_Detail" />
+          <NavigationProperty Name="Comics" Relationship="Self.FK__Comic__idAccount__5FB337D6" FromRole="Account" ToRole="Comic" />
+        </EntityType>
+        <EntityType Name="Account_Detail">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="Int32" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="imgAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_D__idAcc__4E88ABD4" FromRole="Account_Detail" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Chuong">
+          <Key>
+            <PropertyRef Name="idChuong" />
+          </Key>
+          <Property Name="idChuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenChuong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idComic" Type="Int32" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Comic" Relationship="Self.FK__Chuong__idComic__6383C8BA" FromRole="Chuong" ToRole="Comic" />
+        </EntityType>
+        <EntityType Name="Comic">
+          <Key>
+            <PropertyRef Name="idComic" />
+          </Key>
+          <Property Name="idComic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameComic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="imgComic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idTypeComic" Type="Int32" Nullable="false" />
+          <Property Name="decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idAccount" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Comic__idAccount__5FB337D6" FromRole="Comic" ToRole="Account" />
+          <NavigationProperty Name="Chuongs" Relationship="Self.FK__Chuong__idComic__6383C8BA" FromRole="Comic" ToRole="Chuong" />
+          <NavigationProperty Name="Type_Comic" Relationship="Self.FK__Comic__idTypeCom__5EBF139D" FromRole="Comic" ToRole="Type_Comic" />
+          <NavigationProperty Name="ListFavourites" Relationship="Self.FK__ListFavou__idCom__6754599E" FromRole="Comic" ToRole="ListFavourite" />
+        </EntityType>
+        <EntityType Name="Forgot_Password">
+          <Key>
+            <PropertyRef Name="idForgot_Password" />
+          </Key>
+          <Property Name="idForgot_Password" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListFavourite">
+          <Key>
+            <PropertyRef Name="idFavourite" />
+            <PropertyRef Name="idAccount" />
+            <PropertyRef Name="idComic" />
+          </Key>
+          <Property Name="idFavourite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAccount" Type="Int32" Nullable="false" />
+          <Property Name="idComic" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comic" Relationship="Self.FK__ListFavou__idCom__6754599E" FromRole="ListFavourite" ToRole="Comic" />
+          <NavigationProperty Name="User" Relationship="Self.FK__ListFavou__idAcc__66603565" FromRole="ListFavourite" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Type_Comic">
+          <Key>
+            <PropertyRef Name="idTypeComic" />
+          </Key>
+          <Property Name="idTypeComic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameTypeComic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comics" Relationship="Self.FK__Comic__idTypeCom__5EBF139D" FromRole="Type_Comic" ToRole="Comic" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ListFavourites" Relationship="Self.FK__ListFavou__idAcc__66603565" FromRole="User" ToRole="ListFavourite" />
+          <NavigationProperty Name="User_Detail" Relationship="Self.FK__User_Deta__idAcc__5812160E" FromRole="User" ToRole="User_Detail" />
+        </EntityType>
+        <EntityType Name="User_Detail">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="Int32" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="imgAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User_Deta__idAcc__5812160E" FromRole="User_Detail" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Account_D__idAcc__4E88ABD4">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comic__idAccount__5FB337D6">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Chuong__idComic__6383C8BA">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="idComic" />
+            </Principal>
+            <Dependent Role="Chuong">
+              <PropertyRef Name="idComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comic__idTypeCom__5EBF139D">
+          <End Role="Type_Comic" Type="Self.Type_Comic" Multiplicity="1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Comic">
+              <PropertyRef Name="idTypeComic" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="idTypeComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListFavou__idCom__6754599E">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="ListFavourite" Type="Self.ListFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="idComic" />
+            </Principal>
+            <Dependent Role="ListFavourite">
+              <PropertyRef Name="idComic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListFavou__idAcc__66603565">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListFavourite" Type="Self.ListFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="ListFavourite">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Deta__idAcc__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Detail" Type="Self.User_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="User_Detail">
+              <PropertyRef Name="idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Managerment_PageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
+          <EntitySet Name="Chuongs" EntityType="Self.Chuong" />
+          <EntitySet Name="Comics" EntityType="Self.Comic" />
+          <EntitySet Name="Forgot_Password" EntityType="Self.Forgot_Password" />
+          <EntitySet Name="ListFavourites" EntityType="Self.ListFavourite" />
+          <EntitySet Name="Type_Comic" EntityType="Self.Type_Comic" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Detail" EntityType="Self.User_Detail" />
+          <AssociationSet Name="FK__Account_D__idAcc__4E88ABD4" Association="Self.FK__Account_D__idAcc__4E88ABD4">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comic__idAccount__5FB337D6" Association="Self.FK__Comic__idAccount__5FB337D6">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Comic" EntitySet="Comics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Chuong__idComic__6383C8BA" Association="Self.FK__Chuong__idComic__6383C8BA">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="Chuong" EntitySet="Chuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comic__idTypeCom__5EBF139D" Association="Self.FK__Comic__idTypeCom__5EBF139D">
+            <End Role="Type_Comic" EntitySet="Type_Comic" />
+            <End Role="Comic" EntitySet="Comics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListFavou__idCom__6754599E" Association="Self.FK__ListFavou__idCom__6754599E">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="ListFavourite" EntitySet="ListFavourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListFavou__idAcc__66603565" Association="Self.FK__ListFavou__idAcc__66603565">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ListFavourite" EntitySet="ListFavourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Deta__idAcc__5812160E" Association="Self.FK__User_Deta__idAcc__5812160E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Detail" EntitySet="User_Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Managerment_PageModelStoreContainer" CdmEntityContainer="Managerment_PageEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Detail">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Account_Detail">
+              <MappingFragment StoreEntitySet="Account_Detail">
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="imgAccount" ColumnName="imgAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chuongs">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Chuong">
+              <MappingFragment StoreEntitySet="Chuong">
+                <ScalarProperty Name="idChuong" ColumnName="idChuong" />
+                <ScalarProperty Name="tenChuong" ColumnName="tenChuong" />
+                <ScalarProperty Name="idComic" ColumnName="idComic" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comics">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Comic">
+              <MappingFragment StoreEntitySet="Comic">
+                <ScalarProperty Name="idComic" ColumnName="idComic" />
+                <ScalarProperty Name="nameComic" ColumnName="nameComic" />
+                <ScalarProperty Name="imgComic" ColumnName="imgComic" />
+                <ScalarProperty Name="idTypeComic" ColumnName="idTypeComic" />
+                <ScalarProperty Name="decription" ColumnName="decription" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forgot_Password">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Forgot_Password">
+              <MappingFragment StoreEntitySet="Forgot_Password">
+                <ScalarProperty Name="idForgot_Password" ColumnName="idForgot_Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListFavourites">
+            <EntityTypeMapping TypeName="Managerment_PageModel.ListFavourite">
+              <MappingFragment StoreEntitySet="ListFavourite">
+                <ScalarProperty Name="idFavourite" ColumnName="idFavourite" />
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="idComic" ColumnName="idComic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Comic">
+            <EntityTypeMapping TypeName="Managerment_PageModel.Type_Comic">
+              <MappingFragment StoreEntitySet="Type_Comic">
+                <ScalarProperty Name="idTypeComic" ColumnName="idTypeComic" />
+                <ScalarProperty Name="nameTypeComic" ColumnName="nameTypeComic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Managerment_PageModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Detail">
+            <EntityTypeMapping TypeName="Managerment_PageModel.User_Detail">
+              <MappingFragment StoreEntitySet="User_Detail">
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="imgAccount" ColumnName="imgAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,194 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.master.cs" Inherits="ibook.index" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Ebook</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/index.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="font-logo mt-10">
+                        <a class="black" href="index.aspx">iBOOK</a>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="input-group mt-20">
+                        <div class="input-group-btn ">
+
+                            <asp:Button ID="btnSearch" CssClass="btn btn-default bg-search btn-search" runat="server" ForeColor="#6699ff" Text="OK" OnClick="Unnamed1_Click"></asp:Button>
+                        </div>
+                        <asp:TextBox ID="tbSearch" placeholder="Searching book, story, etc... " Text="" CssClass="form-control bg-search ip-search" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="mt-4 robo ml190">
+                        <ul class="fs20 flex ">
+                            <li>
+                                <a class="black fwb " href="">Contact</a>
+                            </li>
+                            <li>
+                                <a class="black fwb" href="">Help</a>
+                            </li>
+                            <li>
+                                <a class="black fwb" href="LoginUser.aspx">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- end header -->
+
+            <div>
+                <div class="row ">
+                    <div class="col-md-3 ">
+                        <div class="text-center mt-2">
+                            <div>
+                                <asp:Image CssClass="pic-ava rounded-circle" runat="server" ID="AvatarKhachHang" />
+                            </div>
+                            <div class="robo fs20 fwb">
+                                <asp:Label runat="server" ID="NameKhachHang"></asp:Label></div>
+                        </div>
+                        <hr>
+                        <div>
+                            <!-- <li class="bg-xanh mr-3 p-2">
+                            <a class="row white " href="">
+                                <img src="./img/home@2x.png" class="col-md-2" width="100px" alt="">
+                                <div class="col-md-10">Trang chủ</div>
+                            </a>
+                        </li> -->
+
+                            <div class="text-center p-1 maulistmenu">
+                                <a class=" fs20  " href="index.aspx">Trang chủ
+                                </a>
+                            </div>
+
+                            <div class="text-center p-1 ">
+                                <a class=" fs20  " href="Favourite.aspx">Yêu thích
+                                </a>
+                            </div>
+                            <div class="text-center p-1 ">
+                                <a class=" fs20  " href="">Đang đọc
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="robo typecomic">
+                            <ul style="list-style-type: disc">
+                                <span class="fwb fs20 ">Thể loại sách</span>
+
+                                <asp:Repeater ID="rptTypeComic" runat="server" DataSourceID="dtsTypeComic" OnItemCommand="rptTypeComic_ItemCommand">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a href="<%# string.Format("Search.aspx?idTypeComic="+ Eval("idTypeComic")) %>"><%# Eval("nameTypeComic") %> </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:SqlDataSource ID="dtsTypeComic" runat="server" ConnectionString="<%$ ConnectionStrings:Managerment_PageConnectionString %>" SelectCommand="SELECT * FROM [Type_Comic]"></asp:SqlDataSource>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ">
+                        <div class="jumbotron row">
+                            <div class="col-md-6 mt--50">
+                                <div class="ml-5">
+                                    <div class="menu-jumbo">Killing </div>
+                                    <div class="menu-jumbo">Hemingway</div>
+                                    <p class="mt-2">
+                                        <a class="black fwb " href="">
+                                            <img class="pic" src="./img/Group 306.png" alt="">
+                                            Tiếp tục đọc
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt--50">
+                                <img class="pic ml-5" width="230px" src="./img/book.png" alt="">
+                            </div>
+
+                        </div>
+
+                        <p id="timkiem" class="robo fs20 font-weight-bold">Kết quả tìm kiếm:</p>
+                        <div class="row">
+                            <asp:Repeater ID="searchbook" runat="server">
+                                <ItemTemplate>
+                                    <div class="col-md-3">
+                                        <a href="<%# string.Format("Detail.aspx?idComic="+ Eval("idComic")) %>">
+                                            <img width="150px" class="pic" src="<%# string.Format("img/comic/"+Eval("imgComic")) %>" alt="">
+                                            <div class="fwb sitka black"><%# Eval("nameComic") %></div>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+
+                        <asp:ContentPlaceHolder ID="Content" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <br>
+            <div class="row footer robo " style="border-radius: 3px; background-color: rosybrown">
+                <div class="col-md-4 "></div>
+                <div class="col-md-4 footer2 mt-2">
+                    <ul class="flex fl-even ">
+                        <li><a href=" ">About us</a></li>
+                        <li><a href=" ">Privacy Policy</a></li>
+                        <li><a href=" ">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mt-2 flex fl-end">
+                    <div>
+                        <a href="">
+                            <img class="pic" src="./img/facebook.png" alt=""></a>
+                    </div>
+
+                    <div class="ml-3">
+                        <a href="">
+                            <img class="pic" src="./img/instagram.png" alt=""></a>
+                    </div>
+                    <div class="ml-3">
+                        <a href="">
+                            <img class="pic" src="./img/linkedin.png" alt=""></a>
+                    </div>
+                    <div class="ml-3">
+                        <a href="">
+                            <img class="pic" src="./img/twitter.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <asp:ContentPlaceHolder ID="js" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnSearch").click(function () {
+                $("#timkiem").show();
+            });
+            $("#timkiem").click(function () {
+                $("#timkiem").hide();
+            });
+        });
+    </script>
+</body>
+</html>

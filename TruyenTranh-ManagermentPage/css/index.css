@@ -1,0 +1,168 @@
+a {
+    text-decoration: none;
+    color: #707070;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.black {
+    color: black;
+}
+
+.bg-search {
+    background-color: #EEEEEF;
+}
+
+.btn-search {
+    border: none;
+    border-radius: 15px 0 0 15px;
+}
+
+.ip-search {
+    border: none;
+    border-radius: 15px;
+}
+
+.pic {
+    object-fit: cover;
+}
+
+.font-logo {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Sitka Subheading;
+}
+
+.fs20 {
+    font-size: 17px;
+}
+
+.fs25 {
+    font-size: 30px;
+    font-family: Sitka Subheading;
+}
+
+.robo {
+    font-family: Roboto;
+}
+
+.sitka {
+    font-family: Sitka Banner;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt--15 {
+    margin-top: -15px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mt--50 {
+    margin-top: -50px;
+}
+
+.fwb {
+    font-weight: bold;
+}
+
+.ml190 {
+    margin-left: 150px;
+}
+
+.ml190 ul li {
+    margin-right: 30px;
+}
+
+.pic-ava {
+    object-fit: cover;
+    width: 4rem;
+    height: 4rem;
+}
+
+.bg-xanh {
+    background-color: #10844C;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.maulistmenu {
+    color: #707070;
+    background-color: #10844C;
+    border-radius: 25px;
+}
+
+.maulistmenu a {
+    color: white;
+}
+
+.typecomic li {
+    margin-left: 20px;
+}
+
+
+/* .listmenu:hover {
+    color: white;
+    background-color: #10844C;
+} */
+
+.fl-even {
+    justify-content: space-evenly;
+}
+
+.fl-end {
+    justify-content: flex-end;
+}
+
+.fl-betwen {
+    justify-content: space-between;
+}
+
+.footer {
+    background-color: black;
+}
+
+.footer2 a {
+    color: white;
+    text-decoration: underline;
+}
+
+.menu-jumbo {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: Sitka Subheading;
+}
+
+.jumbotron {
+    height: 240px;
+}
+
+.clxamtim {
+    color: #7E8EAA;
+}
+
+.bg-xam {
+    background-color: #F1F1F1;
+    border-radius: 5px;
+}
